@@ -1,0 +1,53 @@
+body, html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+.leftpane {
+    width: 20%;
+    height: 100%;
+    float: left;
+    border-collapse: collapse;
+	margin-left: 10px
+}
+
+.middlepane {
+    width: 50%;
+    height: 100%;
+    float: left;
+	text-align: center;
+    border-collapse: collapse;
+}
+
+.rightpane {
+  width: 25%;
+  height: 100%;
+  position: relative;
+  float: right;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+.toppane {
+  width: 100%;
+  height: 100px;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+.gallery {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: 5px solid black;
+    border-radius: 15px;
+    text-align: right;
+	height: 50px;
+	width: 20%
+}
