@@ -1,53 +1,115 @@
-body, html {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-}
-
-.container {
-  width: 100%;
-  height: 100%;
-}
-
 .leftpane {
-    width: 20%;
+    width: 10%;
     height: 100%;
     float: left;
-    border-collapse: collapse;
-	margin-left: 10px
+    border-style: solid;
 }
 
-.middlepane {
+.canvas {
     width: 50%;
     height: 100%;
     float: left;
-	text-align: center;
+    text-align: center;
     border-collapse: collapse;
+    border-style: solid;
+    margin-left: 7%;
 }
 
 .rightpane {
-  width: 25%;
-  height: 100%;
-  position: relative;
-  float: right;
-  text-align: center;
-  border-collapse: collapse;
+    width: 25%;
+    height: 100%;
+    position: relative;
+    float: right;
+    text-align: center;
+    border-style: solid;
 }
 
 .toppane {
-  width: 100%;
-  height: 100px;
-  text-align: center;
-  border-collapse: collapse;
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    border-collapse: collapse;
 }
 
 .gallery {
     display: block;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    border: 5px solid black;
-    border-radius: 15px;
-    text-align: right;
-	height: 50px;
-	width: 20%
+    border: 2px solid #000000;
+    border-radius: 5px;
+    height: 75px;
+    width: 75px;
+    display: block;
+    margin: 20px auto 10px;
+}
+
+section{
+    text-align: center;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
+th, td {
+    padding: 5px;
+    text-align: center;
+}.leftpane {
+     width: 10%;
+     height: 100%;
+     float: left;
+     border-style: solid;
+ }
+
+.canvas {
+    width: 50%;
+    height: 100%;
+    float: left;
+    text-align: center;
+    border-collapse: collapse;
+    border-style: solid;
+    margin-left: 7%;
+}
+
+.rightpane {
+    width: 25%;
+    height: 100%;
+    position: relative;
+    float: right;
+    text-align: center;
+    border-style: solid;
+}
+
+.toppane {
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.gallery {
+    display: block;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    height: 75px;
+    width: 75px;
+    display: block;
+    margin: 20px auto 10px;
+}
+
+section{
+    text-align: center;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
+th, td {
+    padding: 5px;
+    text-align: center;
 }
