@@ -62,7 +62,8 @@
             $(this).append(new_signature);
             new_signature.draggable({
                 helper: false
-            })
+            }).resizable()
+
         }
     });
 
