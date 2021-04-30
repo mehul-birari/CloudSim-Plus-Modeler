@@ -24,40 +24,22 @@
     <div class="rightpane">
         <h1>Selected Content Table</h1>
         <span class="element"></span>
-        <br/><br/>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Value</th>
-            </tr>
-            <tr>
-                <td>RAM</td>
-                <td><input type="text"></td>
-            </tr>
-            <tr>
-                <td>BW</td>
-                <td><input type="text"></td>
-            </tr>
-            <tr>
-                <td>Storage</td>
-                <td><input type="text"></td>
-            </tr>
-        </table>
-        <br/>
-        <button>Save</button>
+        <jsp:include page="tables.jsp" />
         <br>
+        <button onclick='saveAttribute($("table:visible")[0].className, $(".element").text().trim())'>Save</button>
         <br>
-        <button>Generate</button>
+        <button onclick="sendData()">Generate</button>
     </div>
 </div>
 </body>
 <script>
-    const canvas = $(".canvas");
+    const canvas = $(".canvas")
     const selectedClass = "ui-selected";
-    var dcIndex = 0
-    var hostIndex = 0
-    var vmIndex = 0
-    var cloudletIndex = 0
+    let dcIndex = 0
+    let hostIndex = 0
+    let vmIndex = 0
+    let cloudletIndex = 0
+    let formData = []
 
     $(".draggable").draggable({
         start: function (e, ui) {
@@ -73,62 +55,89 @@
     canvas.droppable({
         drop: function(event, ui) {
             selectedModule(ui)
-            var new_signature = ui.helper.is('.ui-resizable') ?
+            let new_signature = ui.helper.is('.ui-resizable') ?
                 ui.helper
                 :
                 $(ui.helper).clone().removeClass('tool ui-draggable ui-draggable-handle ui-draggable-dragging');
             $(this).append(new_signature);
             new_signature.draggable({
                 helper: false
-            }).resizable()
-
+            })
         }
     });
 
-    function selectedModule(ui) {
-        let element = $(ui.helper)
-        var module = ""
-        var child = element.children(".gallery")
-        console.log(child)
 
-        let index
+    function updateIndex(element){
+        let child = element.children(".gallery")
+        let module = ""
+        let index = 0
         if(!child.hasClass('dc') && !child.hasClass('host') && !child.hasClass('vm') && !child.hasClass('cloudlet')) {
             if (element.hasClass('dc')) {
-                dcIndex++
-                index = dcIndex
+                index = ++dcIndex
                 module = "dc"
             } else if (element.hasClass('host')) {
-                hostIndex++
-                index = hostIndex
+                index = ++hostIndex
                 module = "host"
             } else if (element.hasClass('vm')) {
-                vmIndex++
-                index = vmIndex
+                index = ++vmIndex
                 module = "vm"
             } else if (element.hasClass('cloudlet')) {
-                cloudletIndex++
-                index = cloudletIndex
+                index = ++cloudletIndex
                 module = "cloudlet"
             }
             child.addClass(module + ' ' + index)
             child.attr('data-index',index)
         }
+        return child
+    }
 
-        //selected panel
-        index = child.attr("data-index")
+    function selectedPanel(element,child){
+        let module = ""
+        $("table").css("display","none")
+        let index = child.attr("data-index")
         if (element.hasClass('dc')) {
             module = "Datacenter"
+            $(".datacenter_table").css("display","block")
         } else if (element.hasClass('host')) {
             module = "Host"
+            $(".host_table").css("display","block")
         } else if (element.hasClass('vm')) {
             module = "Virtual Machine"
+            $(".vm_table").css("display","block")
         } else if (element.hasClass('cloudlet')) {
             module = "Cloudlet"
+            $(".cloudlet_table").css("display","block")
         }
+        $("button").css("display","block")
         module += "_"+index
+        return module
+    }
 
-        $(".element").text(module);
-        console.log(child)
+    function selectedModule(ui) {
+        let child = updateIndex($(ui.helper))
+        let module = selectedPanel($(ui.helper),child)
+        $(".element").text(module)
+    }
+
+    function saveAttribute(table, element){
+        let attr_table = {"id":element}
+        $("."+table+" tbody tr").each(function () {
+            let self = $(this)
+            let col_1_value = self.find("td:eq(0)").text().trim()
+            let col_2_value = self.find(".value").val()
+            attr_table[col_1_value] = col_2_value
+        });
+        formData.push(attr_table)
+    }
+
+    function sendData(){
+        console.log(formData)
+        $.ajax({
+            type: "POST",
+            url: "/sendData",
+            data: JSON.stringify(formData),
+            dataType : "application/json",
+        });
     }
 
 </script>
