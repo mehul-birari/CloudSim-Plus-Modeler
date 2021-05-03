@@ -26,7 +26,7 @@
         <span class="element"></span>
         <jsp:include page="tables.jsp" />
         <br>
-        <button onclick='saveAttribute($("table:visible")[0].className, $(".element").text().trim())'>Save</button>
+        <button onclick='saveAttribute($("table:visible")[0].className, $(".element").text().trim(),$(".element").attr("data-module"))'>Save</button>
         <br>
         <button onclick="sendData()">Generate</button>
     </div>
@@ -39,7 +39,10 @@
     let hostIndex = 0
     let vmIndex = 0
     let cloudletIndex = 0
-    let formData = []
+    let hostList = []
+    let dcList = []
+    let vmList = []
+    let cloudletList = []
 
     $(".draggable").draggable({
         start: function (e, ui) {
@@ -95,7 +98,6 @@
     function selectedPanel(element,child){
         let module = ""
         $("table").css("display","none")
-        let index = child.attr("data-index")
         if (element.hasClass('dc')) {
             module = "Datacenter"
             $(".datacenter_table").css("display","block")
@@ -110,34 +112,69 @@
             $(".cloudlet_table").css("display","block")
         }
         $("button").css("display","block")
-        module += "_"+index
         return module
     }
 
     function selectedModule(ui) {
         let child = updateIndex($(ui.helper))
         let module = selectedPanel($(ui.helper),child)
-        $(".element").text(module)
+        let index = child.attr("data-index")
+        $(".element").text(module+"_"+index)
+        $(".element").attr('data-module',module)
     }
 
-    function saveAttribute(table, element){
-        let attr_table = {"id":element}
+    function saveAttribute(table, element, module){
+        debugger
+        let attr_table = {"id":element.split("_")[1]}
         $("."+table+" tbody tr").each(function () {
             let self = $(this)
-            let col_1_value = self.find("td:eq(0)").text().trim()
+            let col_1_value =  self.find("td:eq(0)").attr("data-variable")
             let col_2_value = self.find(".value").val()
             attr_table[col_1_value] = col_2_value
         });
-        formData.push(attr_table)
+        addToList(module,attr_table)
+
+    }
+    function addToList(module, attr_table) {
+        if(module == "Host"){
+            hostList.push(attr_table)
+        }else if(module == "Datacenter"){
+            dcList.push(attr_table)
+        }else if(module == "Virtual Machine"){
+            vmList.push(attr_table)
+        }else if(module == "Cloudlet"){
+            cloudletList.push(attr_table)
+        }
+
     }
 
     function sendData(){
-        console.log(formData)
         $.ajax({
             type: "POST",
-            url: "/sendData",
-            data: JSON.stringify(formData),
-            dataType : "application/json",
+            url: "/sendDataDC",
+            data: JSON.stringify(dcList),
+            contentType : "application/json"
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "/sendDataHost",
+            data: JSON.stringify(hostList),
+            contentType : "application/json"
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "/sendDataVM",
+            data: JSON.stringify(vmList),
+            contentType : "application/json"
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "/sendDataCloudlet",
+            data: JSON.stringify(cloudletList),
+            contentType : "application/json"
         });
     }
 

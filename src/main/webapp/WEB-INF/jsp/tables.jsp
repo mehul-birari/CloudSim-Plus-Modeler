@@ -7,63 +7,63 @@
     </thead>
     <tbody>
     <tr>
-        <td>Host</td>
+        <td data-variable="host">Host</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>Amount</td>
+        <td data-variable="amount">Amount</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>Architecture</td>
+        <td data-variable="architecture">Architecture</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>OS</td>
+        <td data-variable="os">OS</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>VMM</td>
+        <td data-variable="vmm">VMM</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>TimeZone</td>
+        <td data-variable="timeZone">TimeZone</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>VM Allocation Policy</td>
+        <td data-variable="vmAllocationPolicy">VM Allocation Policy</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>VM Migration</td>
+        <td data-variable="vmMigration">VM Migration</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>Cost Per Sec</td>
+        <td data-variable="costPerSec">Cost Per Sec</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>Cost Per Mem</td>
+        <td data-variable="costPerMem">Cost Per Mem</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>Cost Per Storage</td>
+        <td data-variable="costPerStorage">Cost Per Storage</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>Cost Per Bw</td>
+        <td data-variable="costPerBw">Cost Per Bw</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>Upper Utilization Threshold</td>
+        <td data-variable="upperUtilizationThreshold">Upper Utilization Threshold</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>Lower Utilization Threshold</td>
+        <td data-variable="lowerUtilizationThreshold">Lower Utilization Threshold</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>Scheduling Interval</td>
+        <td data-variable="schedulingInterval">Scheduling Interval</td>
         <td><input type="text" class="value"/></td>
     </tr>
     </tbody>
@@ -78,43 +78,43 @@
     </thead>
     <tbody>
     <tr>
-        <td>TimeZone</td>
+        <td data-variable="timeZone">TimeZone</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>Amount</td>
+        <td data-variable="amount">Amount</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>Length</td>
+        <td data-variable="length">Length</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>File Size</td>
+        <td data-variable="fileSize">File Size</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>Output Size</td>
+        <td data-variable="outputSize">Output Size</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>PES</td>
+        <td data-variable="pes">PES</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>Utilization Model CPU</td>
+        <td data-variable="utilizationModelCpu">Utilization Model CPU</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>Utilization Model RAM</td>
+        <td data-variable="utilizationModelRam">Utilization Model RAM</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>Utilization Model BW</td>
+        <td data-variable="utilizationModelBw">Utilization Model BW</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>Submission Delay</td>
+        <td data-variable="submissionDelay">Submission Delay</td>
         <td><input type="text" class="value"/></td>
     </tr>
     </tbody>
@@ -130,55 +130,55 @@
     </thead>
     <tbody>
     <tr>
-        <td>PES</td>
+        <td data-variable="pes">PES</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>Amount</td>
+        <td data-variable="amount">Amount</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>MIPS</td>
+        <td data-variable="mips">MIPS</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>MAX Power</td>
+        <td data-variable="maxPower">MAX Power</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>Static Power Percent</td>
+        <td data-variable="staticPowerPercent">Static Power Percent</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>RAM</td>
+        <td data-variable="ram">RAM</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>BW</td>
+        <td data-variable="bw">BW</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>RAM Provisioner</td>
+        <td data-variable="ramProvisioner">RAM Provisioner</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>BW Provisioner</td>
+        <td data-variable="bwProvisioner">BW Provisioner</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>PE Provisioner</td>
+        <td data-variable="peProvisioner">PE Provisioner</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>VM Scheduler</td>
+        <td data-variable="vmScheduler">VM Scheduler</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>Power Model</td>
+        <td data-variable="powerModel">Power Model</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>Storage</td>
+        <td data-variable="storage">Storage</td>
         <td><input type="text" class="value"/></td>
     </tr>
     </tbody>
@@ -193,39 +193,39 @@
     </thead>
     <tbody>
     <tr>
-        <td>PES</td>
+        <td data-variable="pes">PES</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>Amount</td>
+        <td data-variable="amount">Amount</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>MIPS</td>
+        <td data-variable="mips">MIPS</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>Size</td>
+        <td data-variable="size">Size</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>Cloudlet Scheduler</td>
+        <td data-variable="cloudletScheduler">Cloudlet Scheduler</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>RAM</td>
+        <td data-variable="ram">RAM</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>BW</td>
+        <td data-variable="bw">BW</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>Priority</td>
+        <td data-variable="prority">Priority</td>
         <td><input type="text" class="value"/></td>
     </tr>
     <tr>
-        <td>VMM</td>
+        <td data-variable="vmm">VMM</td>
         <td><input type="text" class="value"/></td>
     </tr>
     </tbody>
