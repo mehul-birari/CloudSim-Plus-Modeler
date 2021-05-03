@@ -4,6 +4,7 @@ import cloudreports.models.CloudletRegistry;
 import cloudreports.models.DatacenterRegistry;
 import cloudreports.models.HostRegistry;
 import cloudreports.models.VmRegistry;
+import com.clousimmodeler.project.CloudSimRunner;
 import com.clousimmodeler.project.FormDataBean;
 import com.clousimmodeler.project.SimulationService;
 import com.clousimmodeler.project.SimulationServiceImpl;
@@ -19,6 +20,7 @@ import java.util.List;
 @Controller
 public class HomeController {
     private SimulationService simulationService = new SimulationServiceImpl();
+
     FormDataBean dataBean = new FormDataBean();
 
     @RequestMapping("/")
@@ -50,10 +52,24 @@ public class HomeController {
     }
 
     @RequestMapping("/sendDataCloudlet")
-    public String sendDataCloudlet(@RequestBody List<CloudletRegistry> cloudletList){
+    public ModelAndView sendDataCloudlet(@RequestBody List<CloudletRegistry> cloudletList){
         System.out.println(cloudletList);
         dataBean.setCloudletRegistryList(cloudletList);
-        return "index";
+        String output = CloudSimRunner.CloudSimRunner();
+        var mav = new ModelAndView("output");
+        mav.addObject("output", output);
+        return mav;
     }
+
+//    @GetMapping(value = "/show")
+//    public ModelAndView show() {
+//        //CloudSimRunner cloudSimRunner = new CloudSimRunner();
+//        String output = CloudSimRunner.output;
+//        var mav = new ModelAndView();
+//        mav.addObject("output", output);
+//        mav.setViewName("show");
+//        return mav;
+//    }
+
 
 }

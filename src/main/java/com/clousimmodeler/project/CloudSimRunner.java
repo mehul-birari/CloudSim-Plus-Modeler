@@ -5,14 +5,23 @@ import org.cloudsimplus.automation.CloudSimulation;
 import org.cloudsimplus.automation.YamlCloudScenario;
 import org.cloudsimplus.automation.YamlCloudScenarioReader;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.List;
 
 public class CloudSimRunner {
 
-    public static void main(String[] args) {
+    public static String CloudSimRunner() {
 
+        String output = "";
         try {
+
+            ByteArrayOutputStream test = new ByteArrayOutputStream();
+            PrintStream PS = new PrintStream(test);
+            PrintStream old = System.out;
+            System.setOut(PS);
+
             //Loads a YAML file containing 1 or more simulation scenarios.
             final YamlCloudScenarioReader reader = new YamlCloudScenarioReader("src/main/resources/CloudEnvironment1.yml");
             //Gets the list or parsed scenarios.
@@ -21,8 +30,15 @@ public class CloudSimRunner {
             for (YamlCloudScenario scenario : simulationScenarios) {
                 new CloudSimulation(scenario).run();
             }
+
+            System.setOut(old);
+            output = test.toString();
+            System.out.println(output);
+
         } catch (FileNotFoundException | YamlException e) {
             System.err.println("Error when trying to load the simulation scenario from the YAML file: "+e.getMessage());
         }
+
+        return output;
     }
 }

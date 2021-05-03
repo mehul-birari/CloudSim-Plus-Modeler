@@ -31,6 +31,11 @@
         <button onclick="sendData()">Generate</button>
     </div>
 </div>
+
+<span class="output">
+    ${output}
+</span>
+
 </body>
 <script>
     const canvas = $(".canvas")
@@ -170,12 +175,17 @@
             contentType : "application/json"
         });
 
+        debugger
         $.ajax({
             type: "POST",
             url: "/sendDataCloudlet",
             data: JSON.stringify(cloudletList),
             contentType : "application/json"
-        });
+        }).done(function (data) {
+            //$("html").html(data)
+            $(".output").html(data)
+            // console.log(data)
+            });
     }
 
 </script>
