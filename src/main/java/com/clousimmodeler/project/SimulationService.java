@@ -6,10 +6,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.Map;
 
 public interface SimulationService {
-    public void generate(DatacenterRegistry datacenterRegistry, CustomerRegistry customerRegistry) throws JsonProcessingException;
-
-    public void createLists(Map<String, String> formData) ;
+    public String generate(FormDataBean formDataBean) throws IOException;
 }

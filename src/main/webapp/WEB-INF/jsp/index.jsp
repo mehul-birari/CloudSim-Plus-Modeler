@@ -6,6 +6,8 @@
     <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="/css/style.css">
     <script type="text/javascript" src="/js/script.js"></script>
+    <script type="text/javascript" src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
 
     <title>CloudSim Modeler</title>
 </head>
@@ -24,20 +26,26 @@
     <div class="rightpane">
         <h1>Selected Content Table</h1>
         <span class="element"></span>
-        <jsp:include page="tables.jsp" />
-        <br>
-        <button onclick='saveAttribute($("table:visible")[0].className, $(".element").text().trim(),$(".element").attr("data-module"))'>Save</button>
+        <div class="tableTab">
+            <jsp:include page="tables.jsp" />
+        </div>
         <br>
         <button onclick="sendData()">Generate</button>
     </div>
 </div>
 
 <span class="output">
-    ${output}
 </span>
 
 </body>
 <script>
+    $(document).ready( function () {
+        $('table').DataTable({
+            "pageLength": 15
+        });
+        $('.divTable').hide();
+    } );
+
     const canvas = $(".canvas")
     const selectedClass = "ui-selected";
     let dcIndex = 0
@@ -62,7 +70,12 @@
     });
     canvas.droppable({
         drop: function(event, ui) {
+            if($(".divTable").is(":visible")){
+                saveAttribute($(".divTable:visible")[0].className.split(" ")[1], $(".element").text().trim(),$(".element").attr("data-module"))
+
+            }
             selectedModule(ui)
+
             let new_signature = ui.helper.is('.ui-resizable') ?
                 ui.helper
                 :
@@ -74,7 +87,6 @@
 
         }
     });
-
 
     function updateIndex(element){
         let child = element.children(".gallery")
@@ -102,19 +114,19 @@
 
     function selectedPanel(element,child){
         let module = ""
-        $("table").css("display","none")
+        $(".divTable").hide()
         if (element.hasClass('dc')) {
             module = "Datacenter"
-            $(".datacenter_table").css("display","block")
+            $(".datacenter").show()
         } else if (element.hasClass('host')) {
             module = "Host"
-            $(".host_table").css("display","block")
+            $(".host").show()
         } else if (element.hasClass('vm')) {
             module = "Virtual Machine"
-            $(".vm_table").css("display","block")
+            $(".vm").show()
         } else if (element.hasClass('cloudlet')) {
             module = "Cloudlet"
-            $(".cloudlet_table").css("display","block")
+            $(".cloudlet").show()
         }
         $("button").css("display","block")
         return module
@@ -129,9 +141,9 @@
     }
 
     function saveAttribute(table, element, module){
-        debugger
-        let attr_table = {"id":element.split("_")[1]}
-        $("."+table+" tbody tr").each(function () {
+        let attr_table = {}
+        attr_table = {"id":element.split("_")[1]}
+        $("."+table+"_table"+" tbody tr").each(function () {
             let self = $(this)
             let col_1_value =  self.find("td:eq(0)").attr("data-variable")
             let col_2_value = self.find(".value").val()
@@ -141,50 +153,61 @@
 
     }
     function addToList(module, attr_table) {
-        if(module == "Host"){
+        let jsonListString = JSON.stringify(attr_table)
+        if(module == "Host" && !JSON.stringify(hostList).includes(jsonListString)) {
             hostList.push(attr_table)
-        }else if(module == "Datacenter"){
+        }else if(module == "Datacenter" && !JSON.stringify(dcList).includes(jsonListString)){
             dcList.push(attr_table)
-        }else if(module == "Virtual Machine"){
+        }else if(module == "Virtual Machine" && !JSON.stringify(vmList).includes(jsonListString)){
             vmList.push(attr_table)
-        }else if(module == "Cloudlet"){
+        }else if(module == "Cloudlet" && !JSON.stringify(cloudletList).includes(jsonListString)){
             cloudletList.push(attr_table)
         }
 
     }
 
+    function mapHostforDatacenter(value) {
+        var hostIdArray = value["host"].split(",");
+        value["host"] = hostList.filter((host) => (hostIdArray.includes(host["id"])))
+
+    }
+
+
     function sendData(){
-        $.ajax({
-            type: "POST",
-            url: "/sendDataDC",
-            data: JSON.stringify(dcList),
-            contentType : "application/json"
-        });
 
-        $.ajax({
-            type: "POST",
-            url: "/sendDataHost",
-            data: JSON.stringify(hostList),
-            contentType : "application/json"
-        });
+        saveAttribute($(".divTable:visible")[0].className.split(" ")[1], $(".element").text().trim(),$(".element").attr("data-module"))
 
-        $.ajax({
-            type: "POST",
-            url: "/sendDataVM",
-            data: JSON.stringify(vmList),
-            contentType : "application/json"
-        });
+        dcList.forEach(mapHostforDatacenter)
+        dcList.forEach(
+            dc => {
+                var object = {
+                    datacenterRegistry: dc,
+                    hostRegistryList: dc["host"],
+                }
 
-        debugger
+                $.ajax({
+                    type: "POST",
+                    url: "/sendDataDC",
+                    data: JSON.stringify(object),
+                    dataType: "JSON",
+                    async:false,
+                    contentType: "application/json",
+                })
+            }
+        );
+
+        var object = {
+            vmRegistryList:vmList,
+            cloudletRegistryList:cloudletList
+        }
         $.ajax({
             type: "POST",
-            url: "/sendDataCloudlet",
-            data: JSON.stringify(cloudletList),
-            contentType : "application/json"
+            url: "/sendDataVmCloudlet",
+            data: JSON.stringify(object),
+            contentType : "application/json",
+            async:false,
         }).done(function (data) {
-            //$("html").html(data)
             $(".output").html(data)
-            // console.log(data)
             });
     }
 

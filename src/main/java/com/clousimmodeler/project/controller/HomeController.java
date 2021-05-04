@@ -5,6 +5,7 @@ import cloudreports.models.DatacenterRegistry;
 import cloudreports.models.HostRegistry;
 import cloudreports.models.VmRegistry;
 import com.clousimmodeler.project.CloudSimRunner;
+import com.clousimmodeler.project.DataCenterBean;
 import com.clousimmodeler.project.FormDataBean;
 import com.clousimmodeler.project.SimulationService;
 import com.clousimmodeler.project.SimulationServiceImpl;
@@ -14,14 +15,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.util.List;
 
 
 @Controller
 public class HomeController {
     private SimulationService simulationService = new SimulationServiceImpl();
-
-    FormDataBean dataBean = new FormDataBean();
+    FormDataBean yamlDataBean = new FormDataBean();
 
     @RequestMapping("/")
     public ModelAndView start(){
@@ -30,46 +31,22 @@ public class HomeController {
         return model;
     }
 
-    @RequestMapping("/sendDataHost")
-    public String sendDataHost(@RequestBody List<HostRegistry> hostList){
-        System.out.println(hostList);
-        dataBean.setHostRegistryList(hostList);
-        return "index";
-    }
+    @RequestMapping("/sendDataVmCloudlet")
+    public ModelAndView sendDataVmCloudlet(@RequestBody FormDataBean dataBean) throws  IOException {
+        yamlDataBean.setVmRegistryList(dataBean.getVmRegistryList());
+        yamlDataBean.setCloudletRegistryList(dataBean.getCloudletRegistryList());
 
-    @RequestMapping("/sendDataDC")
-    public String sendDataDC(@RequestBody List<DatacenterRegistry> dcList){
-        System.out.println(dcList);
-        dataBean.setDatacenterRegistryList(dcList);
-        return "index";
-    }
-
-    @RequestMapping("/sendDataVM")
-    public String sendDataVM(@RequestBody List<VmRegistry> vmList){
-        System.out.println(vmList);
-        dataBean.setVmRegistryList(vmList);
-        return "index";
-    }
-
-    @RequestMapping("/sendDataCloudlet")
-    public ModelAndView sendDataCloudlet(@RequestBody List<CloudletRegistry> cloudletList){
-        System.out.println(cloudletList);
-        dataBean.setCloudletRegistryList(cloudletList);
-        String output = CloudSimRunner.CloudSimRunner();
+        String output = simulationService.generate(yamlDataBean);
         var mav = new ModelAndView("output");
         mav.addObject("output", output);
         return mav;
     }
 
-//    @GetMapping(value = "/show")
-//    public ModelAndView show() {
-//        //CloudSimRunner cloudSimRunner = new CloudSimRunner();
-//        String output = CloudSimRunner.output;
-//        var mav = new ModelAndView();
-//        mav.addObject("output", output);
-//        mav.setViewName("show");
-//        return mav;
-//    }
-
+    @RequestMapping("/sendDataDC")
+    public String sendDataDC(@RequestBody DataCenterBean dataBean){
+        dataBean.getDatacenterRegistry().setHosts(dataBean.getHostRegistryList());
+        yamlDataBean.getDatacenterRegistryList().add(dataBean.getDatacenterRegistry());
+        return "index";
+    }
 
 }
