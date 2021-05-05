@@ -6,7 +6,7 @@
 }
 
 .canvas {
-    width: 50%;
+    width: 40% !important;
     height: 100%;
     float: left;
     text-align: center;
@@ -16,7 +16,7 @@
 }
 
 .rightpane {
-    width: 25%;
+    width: 35% !important;
     height: 100%;
     position: relative;
     float: right;
@@ -45,15 +45,15 @@ section{
 }
 
 table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-    width: 75%;
-    margin-left: auto;
-    margin-right: auto;
+    border: 1px solid black !important;
+    border-collapse: collapse !important;
+    width: 15% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
 th, td {
-    padding: 2px;
-    text-align: center;
+    padding: 2px !important;
+    text-align: center !important;
 }
 
 /*table{*/

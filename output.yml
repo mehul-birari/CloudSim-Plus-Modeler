@@ -1,0 +1,26 @@
+datacenters:
+- id: 1
+  name: ""
+  amount: 1
+  architecture: ""
+  os: ""
+  vmm: ""
+  timeZone: 0.0
+  vmAllocationPolicy: "Simple"
+  vmMigration: true
+  hosts: []
+  costPerSec: 0.0
+  costPerMem: 0.0
+  costPerStorage: 0.0
+  costPerBw: 0.0
+  sans: []
+  upperUtilizationThreshold: 0.0
+  lowerUtilizationThreshold: 0.0
+  schedulingInterval: 0.0
+
+customers:
+- id: 0
+  name: null
+  amount: 1
+  vms: []
+  cloudlets: []
