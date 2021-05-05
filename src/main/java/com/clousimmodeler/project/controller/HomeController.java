@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.util.List;
@@ -15,14 +16,13 @@ import java.util.List;
 
 @Controller
 public class HomeController {
-    private SimulationService simulationService = new SimulationServiceImpl();
+    private final SimulationService simulationService = new SimulationServiceImpl();
     FormDataBean yamlDataBean = new FormDataBean();
-    static Logger logger  = LoggerFactory.getLogger(CloudSimRunner.class);
+    static Logger logger  = LoggerFactory.getLogger(HomeController.class);
 
     @RequestMapping("/")
-    public String start(){
-        logger.info("Homepage");
-        return "index";
+    public ModelAndView start(){
+        return new ModelAndView("index");
     }
 
 
@@ -32,7 +32,7 @@ public class HomeController {
         yamlDataBean.setVmRegistryList(dataBean.getVmRegistryList());
         yamlDataBean.setCloudletRegistryList(dataBean.getCloudletRegistryList());
 
-        List<OutputBean> output = simulationService.generate(yamlDataBean);
+        List<OutputBean> output = simulationService.generate(yamlDataBean, "output.yml");
         logger.info("Inside sendDataVmCloudlet method | end");
         return output;
     }

@@ -3,6 +3,7 @@ package com.clousimmodeler.project;
 import cloudreports.models.*;
 import com.clousimmodeler.project.beans.FormDataBean;
 import com.clousimmodeler.project.beans.OutputBean;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.fasterxml.jackson.dataformat.yaml.YAMLGenerator;
@@ -18,7 +19,7 @@ import static com.clousimmodeler.project.CloudSimRunner.cloudAutomationRunner;
 
 public class SimulationServiceImpl implements SimulationService {
 
-    public List<OutputBean> generate(FormDataBean formDataBean) throws IOException {
+    public List<OutputBean> generate(FormDataBean formDataBean, String fileName) throws IOException {
 
         logger.info("generate() method | start");
 
@@ -27,22 +28,24 @@ public class SimulationServiceImpl implements SimulationService {
         customerRegistry.setVms(formDataBean.getVmRegistryList());
 
         formDataBean.getCustomerRegistryList().add(customerRegistry);
-
-        ObjectMapper mapper = new ObjectMapper(new YAMLFactory().disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER));
-        String yamlDatacenter = "datacenters:\n"+mapper.writeValueAsString(formDataBean.getDatacenterRegistryList());
-        String yamlCustomer = "\ncustomers:\n"+mapper.writeValueAsString(formDataBean.getCustomerRegistryList());
-
-        try{
-            FileWriter myWriter = new FileWriter("output.yml");
-            myWriter.write(yamlDatacenter+yamlCustomer);
-            myWriter.close();
-        }catch (Exception e){
-            logger.error(e.getMessage());
-        }
+        String yamlString = yamlGenerate(formDataBean);
 
         logger.info("generate() method | end");
-        return cloudAutomationRunner();
+        return cloudAutomationRunner(yamlString,fileName);
     }
 
+    public String yamlGenerate(FormDataBean formDataBean) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper(new YAMLFactory().disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER));
+        String yamlDatacenter = "datacenters:\n" + mapper.writeValueAsString(formDataBean.getDatacenterRegistryList());
+        String yamlCustomer = "\ncustomers:\n" + mapper.writeValueAsString(formDataBean.getCustomerRegistryList());
 
+        try {
+            FileWriter myWriter = new FileWriter("output.yml");
+            myWriter.write(yamlDatacenter + yamlCustomer);
+            myWriter.close();
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
+        return yamlDatacenter+yamlCustomer;
+    }
 }

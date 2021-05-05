@@ -50,7 +50,7 @@ customers:
   cloudlets:
   - id: 1
     timeZone: 0.0
-    amount: 10
+    amount: 1
     length: 1000
     fileSize: 1000
     outputSize: 1000

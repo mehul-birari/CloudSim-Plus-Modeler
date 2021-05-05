@@ -1,17 +1,17 @@
-package com.clousimmodeler.project;
+package com.clousimmodeler.project.beans;
 
 import java.sql.Timestamp;
 
-public class SimulationDB {
+public class Simulation {
 
     private int id;
     private String yaml;
     private Timestamp timestamp;
     private String results;
 
-    protected SimulationDB() {}
+    protected Simulation() {}
 
-    protected SimulationDB(String yaml, Timestamp timestamp, String results) {
+    public Simulation(String yaml, Timestamp timestamp, String results) {
         this.yaml = yaml;
         this.timestamp = timestamp;
         this.results = results;
