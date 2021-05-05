@@ -66,18 +66,6 @@
             <td data-variable="costPerBw">Cost Per Bw</td>
             <td><input type="number" min="0" step="0.01" class="value"/></td>
         </tr>
-        <tr>
-            <td data-variable="upperUtilizationThreshold">Upper Utilization Threshold</td>
-            <td><input type="number" min="0" step="0.01" class="value"/></td>
-        </tr>
-        <tr>
-            <td data-variable="lowerUtilizationThreshold">Lower Utilization Threshold</td>
-            <td><input type="number" min="0" step="0.01" class="value"/></td>
-        </tr>
-        <tr>
-            <td data-variable="schedulingInterval">Scheduling Interval</td>
-            <td><input type="number" min="0" step="0.01" class="value"/></td>
-        </tr>
         </tbody>
     </table>
 </div>

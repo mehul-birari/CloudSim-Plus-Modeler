@@ -2,6 +2,7 @@ package com.clousimmodeler.project;
 
 import org.cloudbus.cloudsim.cloudlets.Cloudlet;
 import org.cloudbus.cloudsim.cloudlets.CloudletSimple;
+import org.cloudbus.cloudsim.core.Identifiable;
 import org.cloudsimplus.automation.CloudSimulation;
 import org.cloudsimplus.automation.YamlCloudScenario;
 import org.cloudsimplus.automation.YamlCloudScenarioReader;
@@ -43,10 +44,10 @@ public class CloudSimRunner {
                 for(CloudletSimple cloudlet: cloudlets){
                     OutputBean outputBean = new OutputBean();
                     outputBean.setCloudlet_id(cloudlet.getId());
-                    outputBean.setStatus(cloudlet.getStatus().toString());
-                    outputBean.setDc_id(cloudlet.getLastTriedDatacenter().getId());
-//                    outputBean.setHost_id(cloudlet.);
-//                    outputBean.setHost_pes();
+                    outputBean.setStatus(cloudlet.getStatus().name());
+                    outputBean.setDc_id(cloudlet.getVm().getHost().getDatacenter().getId());
+                    outputBean.setHost_id(cloudlet.getVm().getHost().getId());
+                    outputBean.setHost_pes(cloudlet.getVm().getHost().getWorkingPesNumber());
                     outputBean.setVm_id(cloudlet.getVm().getId());
                     outputBean.setVm_pes(cloudlet.getVm().getNumberOfPes());
                     outputBean.setCloudletLen(cloudlet.getLength());

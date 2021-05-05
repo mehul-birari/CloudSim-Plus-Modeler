@@ -45,15 +45,15 @@ section{
 }
 
 table, th, td {
-    border: 1px solid black !important;
-    border-collapse: collapse !important;
+    /*border: 1px solid black !important;*/
+    /*border-collapse: collapse !important;*/
     width: 15% !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    /*margin-left: auto !important;*/
+    /*margin-right: auto !important;*/
 }
 th, td {
-    padding: 2px !important;
-    text-align: center !important;
+    /*padding: 2px !important;*/
+    /*text-align: center !important;*/
 }
 
 /*table{*/

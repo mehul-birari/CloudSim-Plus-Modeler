@@ -4,7 +4,7 @@ public class OutputBean {
     long cloudlet_id;
     String status;
     long dc_id;
-    int host_id;
+    long host_id;
     int host_pes;
     long vm_id;
     long vm_pes;
@@ -38,11 +38,11 @@ public class OutputBean {
         this.dc_id = dc_id;
     }
 
-    public int getHost_id() {
+    public long getHost_id() {
         return host_id;
     }
 
-    public void setHost_id(int host_id) {
+    public void setHost_id(long host_id) {
         this.host_id = host_id;
     }
 
