@@ -1,61 +1,61 @@
 datacenters:
-- id: 1
-  name: ""
-  amount: 1
-  architecture: ""
-  os: ""
-  vmm: ""
-  timeZone: 0.0
-  vmAllocationPolicy: "Simple"
-  vmMigration: true
-  hosts:
   - id: 1
-    pes: 1
-    mips: 5000.0
-    maxPower: 0.0
-    staticPowerPercent: 0.0
-    ram: 20000
-    bw: 10000
-    ramProvisioner: "Simple"
-    bwProvisioner: "Simple"
-    peProvisioner: "Simple"
-    vmScheduler: "TimeShared"
-    powerModel: "Linear"
+    name: ""
     amount: 1
-    storage: 100000
-  costPerSec: 0.0
-  costPerMem: 0.0
-  costPerStorage: 0.0
-  costPerBw: 0.0
-  sans: []
-  upperUtilizationThreshold: 0.0
-  lowerUtilizationThreshold: 0.0
-  schedulingInterval: 0.0
+    architecture: ""
+    os: ""
+    vmm: ""
+    timeZone: 0.0
+    vmAllocationPolicy: "Simple"
+    vmMigration: true
+    hosts:
+      - id: 1
+        pes: 1
+        mips: 5000.0
+        maxPower: 0.0
+        staticPowerPercent: 0.0
+        ram: 20000
+        bw: 10000
+        ramProvisioner: "Simple"
+        bwProvisioner: "Simple"
+        peProvisioner: "Simple"
+        vmScheduler: "TimeShared"
+        powerModel: "Linear"
+        amount: 1
+        storage: 100000
+    costPerSec: 0.0
+    costPerMem: 0.0
+    costPerStorage: 0.0
+    costPerBw: 0.0
+    sans: []
+    upperUtilizationThreshold: 0.0
+    lowerUtilizationThreshold: 0.0
+    schedulingInterval: 0.0
 
 customers:
-- id: 0
-  name: null
-  amount: 1
-  vms:
-  - id: 1
-    size: 1000
-    pes: 1
-    mips: 1000.0
-    ram: 10000
-    bw: 10000
-    priority: 0
-    vmm: ""
-    cloudletScheduler: "TimeShared"
+  - id: 0
+    name: null
     amount: 1
-  cloudlets:
-  - id: 1
-    timeZone: 0.0
-    amount: 1
-    length: 1000
-    fileSize: 1000
-    outputSize: 1000
-    pes: 1
-    utilizationModelCpu: "Full"
-    utilizationModelRam: "Full"
-    utilizationModelBw: "Full"
-    submissionDelay: 0.0
+    vms:
+      - id: 1
+        size: 1000
+        pes: 1
+        mips: 1000.0
+        ram: 10000
+        bw: 10000
+        priority: 0
+        vmm: ""
+        cloudletScheduler: "TimeShared"
+        amount: 1
+    cloudlets:
+      - id: 1
+        timeZone: 0.0
+        amount: 1
+        length: 1000
+        fileSize: 1000
+        outputSize: 1000
+        pes: 1
+        utilizationModelCpu: "Full"
+        utilizationModelRam: "Full"
+        utilizationModelBw: "Full"
+        submissionDelay: 0.0

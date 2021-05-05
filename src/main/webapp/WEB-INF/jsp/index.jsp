@@ -178,16 +178,25 @@
 
     }
     function addToList(module, attr_table) {
-        let jsonListString = JSON.stringify(attr_table)
-        if(module == "Host" && !JSON.stringify(hostList).includes(jsonListString)) {
+        if(module == "Host" && checkPresent(dcList, attr_table)) {
             hostList.push(attr_table)
-        }else if(module == "Datacenter" && !JSON.stringify(dcList).includes(jsonListString)){
+        }else if(module == "Datacenter" && checkPresent(hostList, attr_table)){
             dcList.push(attr_table)
-        }else if(module == "Virtual Machine" && !JSON.stringify(vmList).includes(jsonListString)){
+        }else if(module == "Virtual Machine" && checkPresent(vmList, attr_table)){
             vmList.push(attr_table)
-        }else if(module == "Cloudlet" && !JSON.stringify(cloudletList).includes(jsonListString)){
+        }else if(module == "Cloudlet" && checkPresent(cloudletList, attr_table)){
             cloudletList.push(attr_table)
         }
+    }
+
+    function checkPresent(componentList, attr_table) {
+        for (let component in componentList) {
+            if (component["id"] == attr_table["id"]) {
+                component = attr_table
+                return false
+            }
+        }
+        return true
     }
 
     function mapHostforDatacenter(value) {
