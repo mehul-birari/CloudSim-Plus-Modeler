@@ -25,7 +25,7 @@
     </div>
     <div class="canvas"></div>
     <div class="rightpane">
-        <h1>Selected Content Table</h1>
+        <h3>Selected Content Table</h3>
         <span class="element"></span>
         <div class="tableTab">
             <jsp:include page="tables.jsp" />
@@ -68,6 +68,7 @@
         });
         $('.divTable').hide();
         $('.outputDiv').hide();
+        $("button").hide()
     } );
 
     const canvas = $(".canvas")
@@ -152,7 +153,7 @@
             module = "Cloudlet"
             $(".cloudlet").show()
         }
-        $("button").css("display","block")
+        $("button").show()
         return module
     }
 

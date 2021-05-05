@@ -1,11 +1,12 @@
 package com.clousimmodeler.project;
 
-import org.cloudbus.cloudsim.cloudlets.Cloudlet;
+import com.clousimmodeler.project.beans.OutputBean;
 import org.cloudbus.cloudsim.cloudlets.CloudletSimple;
-import org.cloudbus.cloudsim.core.Identifiable;
 import org.cloudsimplus.automation.CloudSimulation;
 import org.cloudsimplus.automation.YamlCloudScenario;
 import org.cloudsimplus.automation.YamlCloudScenarioReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -14,8 +15,11 @@ import java.util.List;
 
 public class CloudSimRunner {
 
+    private static Logger logger  = LoggerFactory.getLogger(CloudSimRunner.class);
+
     public static List<OutputBean> cloudAutomationRunner() {
 
+        logger.info("cloudAutomationRunner() method | start");
         List<OutputBean> outputBeanList = new ArrayList<>();
         String output = "";
         try {
@@ -60,9 +64,10 @@ public class CloudSimRunner {
             }
 
         } catch (Exception e) {
-            System.err.println("Error when trying to load the simulation scenario from the YAML file: "+e.getMessage());
+            logger.error("Error when trying to load the simulation scenario from the YAML file: "+e.getMessage());
         }
 
+        logger.info("cloudAutomationRunner() method | end");
         return outputBeanList;
     }
 }

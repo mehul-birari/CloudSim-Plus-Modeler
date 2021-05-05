@@ -1,15 +1,15 @@
 package com.clousimmodeler.project;
 
-import cloudreports.models.CustomerRegistry;
-import cloudreports.models.DatacenterRegistry;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+import com.clousimmodeler.project.beans.FormDataBean;
+import com.clousimmodeler.project.beans.OutputBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 public interface SimulationService {
+
+    static Logger logger  = LoggerFactory.getLogger(CloudSimRunner.class);
     public List<OutputBean> generate(FormDataBean formDataBean) throws IOException;
 }
