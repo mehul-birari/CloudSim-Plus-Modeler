@@ -44,6 +44,13 @@ mvn test
 mvn spring-boot:run
 ```
 
+### Steps to run the project via IntelliJ
+
+- Import the project directly into IntelliJ.
+- Let the project build via maven and install all the external libraries.
+- Run the ProjectApplication file containing the `main()` method.
+- You will see the Spring Boot project running in the console.
+
 NOTE: Once the Spring Boot project starts, hit the `http:\localhost:8080` to view the user interface.
 
 ## Design of CloudSim Plus Modeler
