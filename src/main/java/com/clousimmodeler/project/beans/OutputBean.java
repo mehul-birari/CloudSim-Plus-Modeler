@@ -1,4 +1,4 @@
-package com.clousimmodeler.project;
+package com.clousimmodeler.project.beans;
 
 public class OutputBean {
     long cloudlet_id;

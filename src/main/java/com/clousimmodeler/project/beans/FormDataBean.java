@@ -1,4 +1,4 @@
-package com.clousimmodeler.project;
+package com.clousimmodeler.project.beans;
 
 import cloudreports.models.*;
 
