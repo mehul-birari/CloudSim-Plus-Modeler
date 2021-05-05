@@ -4,15 +4,9 @@ import cloudreports.models.CloudletRegistry;
 import cloudreports.models.DatacenterRegistry;
 import cloudreports.models.HostRegistry;
 import cloudreports.models.VmRegistry;
-import com.clousimmodeler.project.CloudSimRunner;
-import com.clousimmodeler.project.DataCenterBean;
-import com.clousimmodeler.project.FormDataBean;
-import com.clousimmodeler.project.SimulationService;
-import com.clousimmodeler.project.SimulationServiceImpl;
+import com.clousimmodeler.project.*;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
@@ -25,28 +19,30 @@ public class HomeController {
     FormDataBean yamlDataBean = new FormDataBean();
 
     @RequestMapping("/")
-    public ModelAndView start(){
-        ModelAndView model = new ModelAndView("index");
-        model.addObject("Output",new String("Output"));
-        return model;
+    public String start(){
+        return "index";
     }
 
-    @RequestMapping("/sendDataVmCloudlet")
-    public ModelAndView sendDataVmCloudlet(@RequestBody FormDataBean dataBean) throws  IOException {
+
+//    @RequestMapping(value = "/test", method = RequestMethod.POST, produces = "application/json")
+//    public @ResponseBody List<OutputBean> test() {
+////        ModelAndView model = new ModelAndView("index");
+//        return cloudAutomationRunner();
+//    }
+
+    @RequestMapping(value = "/sendDataVmCloudlet", method = RequestMethod.POST, produces = "application/json")
+    public @ResponseBody List<OutputBean> sendDataVmCloudlet(@RequestBody FormDataBean dataBean) throws  IOException {
         yamlDataBean.setVmRegistryList(dataBean.getVmRegistryList());
         yamlDataBean.setCloudletRegistryList(dataBean.getCloudletRegistryList());
 
-        String output = simulationService.generate(yamlDataBean);
-        var mav = new ModelAndView("output");
-        mav.addObject("output", output);
-        return mav;
+        List<OutputBean> output = simulationService.generate(yamlDataBean);
+        return output;
     }
 
-    @RequestMapping("/sendDataDC")
-    public String sendDataDC(@RequestBody DataCenterBean dataBean){
+    @RequestMapping(value = "/sendDataDC", method = RequestMethod.POST, produces = "application/json")
+    public @ResponseBody void sendDataVmCloudlet(@RequestBody DataCenterBean dataBean){
         dataBean.getDatacenterRegistry().setHosts(dataBean.getHostRegistryList());
         yamlDataBean.getDatacenterRegistryList().add(dataBean.getDatacenterRegistry());
-        return "index";
     }
 
 }

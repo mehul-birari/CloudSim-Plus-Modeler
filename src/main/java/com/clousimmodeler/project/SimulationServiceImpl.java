@@ -9,6 +9,7 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLGenerator;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import static com.clousimmodeler.project.CloudSimRunner.cloudAutomationRunner;
@@ -16,7 +17,7 @@ import static com.clousimmodeler.project.CloudSimRunner.cloudAutomationRunner;
 
 public class SimulationServiceImpl implements SimulationService {
 
-    public String generate(FormDataBean formDataBean) throws IOException {
+    public List<OutputBean> generate(FormDataBean formDataBean) throws IOException {
 
         CustomerRegistry customerRegistry = new CustomerRegistry();
         customerRegistry.setCloudlets(formDataBean.getCloudletRegistryList());

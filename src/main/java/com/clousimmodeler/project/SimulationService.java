@@ -7,8 +7,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 public interface SimulationService {
-    public String generate(FormDataBean formDataBean) throws IOException;
+    public List<OutputBean> generate(FormDataBean formDataBean) throws IOException;
 }

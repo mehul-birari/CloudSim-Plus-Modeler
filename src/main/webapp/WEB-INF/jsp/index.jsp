@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.theme.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -35,14 +34,36 @@
     </div>
 </div>
 
+<div class="outputDiv">
+    <table class="outputTable">
+        <thead>
+        <tr>
+            <th>Cloudlet ID</th>
+            <th>Status</th>
+            <th>DC ID</th>
+            <th>Host ID</th>
+            <th>Host PEs</th>
+            <th>VM ID</th>
+            <th>VM PEs</th>
+            <th>CloudletLen</th>
+            <th>CloudletPEs</th>
+            <th>StartTime</th>
+            <th>FinishTime</th>
+            <th>ExecTime</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+
 <span class="output">
 </span>
 
 </body>
 <script>
     $(document).ready( function () {
-        $('table').DataTable({
-            "pageLength": 15
+        $('.datatable').DataTable({
+            "pageLength": 15,
+            "paging":   false,
         });
         $('.divTable').hide();
     } );
@@ -164,20 +185,17 @@
         }else if(module == "Cloudlet" && !JSON.stringify(cloudletList).includes(jsonListString)){
             cloudletList.push(attr_table)
         }
-
     }
 
     function mapHostforDatacenter(value) {
         var hostIdArray = value["host"].split(",");
         value["host"] = hostList.filter((host) => (hostIdArray.includes(host["id"])))
-
     }
 
 
     function sendData(){
 
         saveAttribute($(".divTable:visible")[0].className.split(" ")[1], $(".element").text().trim(),$(".element").attr("data-module"))
-
         dcList.forEach(mapHostforDatacenter)
         dcList.forEach(
             dc => {
@@ -208,8 +226,24 @@
             contentType : "application/json",
             async:false,
         }).done(function (data) {
-            $(".output").html(data)
+            $('.outputTable').DataTable({
+                "data": data,
+                "columns": [
+                    { "data": "cloudlet_id" },
+                    { "data": "status" },
+                    { "data": "dc_id" },
+                    { "data": "host_id" },
+                    { "data": "host_pes" },
+                    { "data": "vm_id" },
+                    { "data": "vm_pes" },
+                    { "data": "cloudletLen" },
+                    { "data": "cloudPes" },
+                    { "data": "startTime" },
+                    { "data": "finishTime" },
+                    { "data": "execTime" }
+                ]
             });
+        });
     }
 
 </script>

@@ -1,5 +1,5 @@
 <div class="divTable datacenter">
-    <table class="datacenter_table">
+    <table class="datatable datacenter_table">
         <thead>
         <tr>
             <th>ID</th>
@@ -82,7 +82,7 @@
     </table>
 </div>
 <div class="divTable cloudlet">
-    <table class="cloudlet_table">
+    <table class="datatable cloudlet_table">
         <thead>
         <tr>
             <th>ID</th>
@@ -148,7 +148,7 @@
     </table>
 </div>
 <div class ="divTable host">
-    <table class="host_table">
+    <table class="datatable host_table">
         <thead>
         <tr>
             <th>ID</th>
@@ -234,7 +234,7 @@
 </div>
 
 <div class="divTable vm">
-    <table class="vm_table">
+    <table class="datatable vm_table">
         <thead>
         <tr>
             <th>ID</th>
