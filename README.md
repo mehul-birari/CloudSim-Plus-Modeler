@@ -44,6 +44,10 @@ mvn test
 mvn spring-boot:run
 ```
 
+### Video Demo 
+
+[![](Images/Thumbnail.jpeg)](http://youtu.be/D6umgWxBQs8?hd=1)
+
 ### Steps to run the project via IntelliJ
 
 - Import the project directly into IntelliJ.
