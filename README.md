@@ -46,7 +46,7 @@ mvn spring-boot:run
 
 ### Video Demo 
 
-[![](Images/Thumbnail.jpeg)](http://youtu.be/D6umgWxBQs8?hd=1)
+[![](Images/Thumbnail.png)](http://youtu.be/D6umgWxBQs8?hd=1)
 
 ### Steps to run the project via IntelliJ
 
