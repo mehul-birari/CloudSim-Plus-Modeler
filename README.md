@@ -59,7 +59,7 @@ NOTE: Once the Spring Boot project starts, hit the `http:\localhost:8080` to vie
 
 ## Architecture of CloudSim Plus Modeler
 
-!["CloudSim Plus Modeler Architecture"](Images/Architecture.JPG)
+!["CloudSim Plus Modeler Architecture"](Images/ArchitectureDiagram.jpg)
 
 ### Components used for building the Application
 
