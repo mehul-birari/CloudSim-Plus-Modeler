@@ -178,10 +178,10 @@
 
     }
     function addToList(module, attr_table) {
-        if(module == "Host" && checkPresent(dcList, attr_table)) {
-            hostList.push(attr_table)
-        }else if(module == "Datacenter" && checkPresent(hostList, attr_table)){
+        if(module == "Datacenter" && checkPresent(dcList, attr_table)) {
             dcList.push(attr_table)
+        }else if(module == "Host" && checkPresent(hostList, attr_table)){
+            hostList.push(attr_table)
         }else if(module == "Virtual Machine" && checkPresent(vmList, attr_table)){
             vmList.push(attr_table)
         }else if(module == "Cloudlet" && checkPresent(cloudletList, attr_table)){
@@ -190,9 +190,10 @@
     }
 
     function checkPresent(componentList, attr_table) {
-        for (let component in componentList) {
-            if (component["id"] == attr_table["id"]) {
-                component = attr_table
+        for (let component=0; component<componentList.length;component++) {
+            debugger
+            if (componentList[component]["id"] == attr_table["id"]) {
+                componentList[component] = attr_table
                 return false
             }
         }
